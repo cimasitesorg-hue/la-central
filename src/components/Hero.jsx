@@ -36,7 +36,7 @@ export default function Hero({ onCtaClick }) {
       >
         <motion.img
           variants={fadeUp}
-          src="/logo.png"
+          src={`${import.meta.env.BASE_URL}logo.png`}
           alt="La Central · Verdulería Boutique"
           width="220"
           height="220"
