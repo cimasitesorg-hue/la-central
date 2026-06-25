@@ -33,7 +33,26 @@ export default function OrderForm({ items, onItemChange, onAddItem, onRemoveItem
           Armá tu canasta
         </motion.h2>
         <motion.p variants={headerItem} className="mt-2 text-sm text-ink/55">
-          Elegí los productos y la cantidad. Lo enviás por WhatsApp en un toque.
+          Elegí los productos y la cantidad. Lo enviás por WhatsApp en segundos.
+        </motion.p>
+
+        {/* Aviso de servicio: pedido + preparacion + envio en el dia */}
+        <motion.p
+          variants={headerItem}
+          className="mx-auto mt-4 flex max-w-[22rem] items-center justify-center gap-2
+                     rounded-2xl bg-sage/10 px-4 py-3 text-sm font-medium text-sage-dark"
+        >
+          <svg viewBox="0 0 24 24" className="h-5 w-5 shrink-0 text-sage" fill="none"
+               stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"
+               strokeLinejoin="round" aria-hidden="true">
+            <path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z" />
+            <circle cx="7" cy="18" r="1.6" />
+            <circle cx="17.5" cy="18" r="1.6" />
+          </svg>
+          <span>
+            Pedí por WhatsApp, lo preparamos y te lo llevamos a la puerta de tu
+            casa en el día.
+          </span>
         </motion.p>
       </motion.div>
 

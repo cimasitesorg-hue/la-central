@@ -27,7 +27,7 @@ const FEATURES = [
   },
   {
     title: "Atención del barrio",
-    text: "Te asesoramos en lo que necesites, con onda.",
+    text: "Te asesoramos en lo que necesites, con dedicación.",
     icon: (
       <path d="M21 11.5a8.5 8.5 0 0 1-12.3 7.6L3 21l1.9-5.7A8.5 8.5 0 1 1 21 11.5z" />
     ),
