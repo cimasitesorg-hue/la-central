@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
-import { PRODUCT_GROUPS } from "../data/products.js";
+import { motion, AnimatePresence } from "framer-motion";
+import { PRODUCT_GROUPS, OTHER_VALUE } from "../data/products.js";
 import QuantityStepper from "./QuantityStepper.jsx";
 
 /**
@@ -42,6 +42,7 @@ export default function ProductRow({ item, index, canRemove, onChange, onRemove 
                 ))}
               </optgroup>
             ))}
+            <option value={OTHER_VALUE}>✏️  Otro (escribir)…</option>
           </select>
           {/* Chevron decorativo */}
           <svg
@@ -65,6 +66,41 @@ export default function ProductRow({ item, index, canRemove, onChange, onRemove 
           onChange={(qty) => onChange(item.id, { qty })}
         />
       </div>
+
+      {/* Campo libre: solo visible cuando el cliente elige "Otro" */}
+      <AnimatePresence initial={false}>
+        {item.product === OTHER_VALUE && (
+          <motion.div
+            key="custom"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.26, ease: [0.22, 1, 0.36, 1] }}
+            className="overflow-hidden"
+          >
+            <div className="pt-2.5">
+              <label htmlFor={`custom-${item.id}`} className="sr-only">
+                Escribí el producto
+              </label>
+              <input
+                id={`custom-${item.id}`}
+                type="text"
+                inputMode="text"
+                autoComplete="off"
+                maxLength={60}
+                value={item.custom || ""}
+                onChange={(e) => onChange(item.id, { custom: e.target.value })}
+                placeholder="Escribí qué necesitás (ej. Rúcula baby, Albahaca…)"
+                className="tap w-full rounded-xl border border-sage/40 bg-sage/5
+                           px-3.5 text-[16px] font-medium text-ink placeholder:text-ink/35
+                           focus:outline-none focus:ring-2 focus:ring-sage/40
+                           focus:border-sage transition-colors"
+                autoFocus
+              />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {canRemove && (
         <div className="mt-2 flex justify-end">

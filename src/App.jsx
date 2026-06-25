@@ -7,7 +7,7 @@ import { clampQuantity } from "./utils/sanitize.js";
 import { buildWhatsappLink, getValidItems } from "./utils/whatsapp.js";
 
 let nextId = 1;
-const newItem = () => ({ id: nextId++, product: "", qty: 1 });
+const newItem = () => ({ id: nextId++, product: "", custom: "", qty: 1 });
 
 export default function App() {
   // Estado del carrito (fuente de verdad unica)

@@ -1,20 +1,26 @@
 // Construccion del enlace a la API de WhatsApp (wa.me).
 // Numero de la verduleria (formato internacional sin "+" ni espacios).
 
-import { sanitizeProduct, clampQuantity } from "./sanitize.js";
+import { sanitizeProduct, sanitizeText, clampQuantity } from "./sanitize.js";
+import { OTHER_VALUE } from "../data/products.js";
 
 export const WHATSAPP_NUMBER = "5491168940231";
 
 /**
  * Filtra y normaliza los items del carrito.
- * Devuelve solo lineas validas: producto en catalogo + cantidad valida.
+ * - Producto del catalogo: se valida contra la whitelist.
+ * - Producto "Otro": se toma el texto libre del cliente, sanitizado.
+ * Solo quedan lineas con nombre valido y cantidad valida.
  */
 export function getValidItems(items = []) {
   return items
-    .map((it) => ({
-      product: sanitizeProduct(it.product),
-      qty: clampQuantity(it.qty),
-    }))
+    .map((it) => {
+      const name =
+        it.product === OTHER_VALUE
+          ? sanitizeText(it.custom, 60)
+          : sanitizeProduct(it.product);
+      return { product: name, qty: clampQuantity(it.qty) };
+    })
     .filter((it) => it.product !== "");
 }
 

@@ -50,3 +50,6 @@ export const PRODUCT_GROUPS = [
 
 // Lista plana (validacion: un producto solo es valido si esta en el catalogo)
 export const PRODUCTS = PRODUCT_GROUPS.flatMap((g) => g.items);
+
+// Opcion especial "Otro": el cliente escribe un producto libre (texto sanitizado).
+export const OTHER_VALUE = "__otro__";

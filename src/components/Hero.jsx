@@ -34,16 +34,20 @@ export default function Hero({ onCtaClick }) {
         className="relative mx-auto flex max-w-app flex-col items-center
                    px-6 pt-14 pb-12 text-center"
       >
-        <motion.img
-          variants={fadeUp}
-          src={`${import.meta.env.BASE_URL}logo.png`}
-          alt="La Central · Verdulería Boutique"
-          width="220"
-          height="220"
-          className="h-40 w-40 rounded-full object-cover shadow-[0_20px_50px_-20px_rgba(0,0,0,0.7)]"
-          // Si el logo aun no fue colocado, no rompe el layout
-          onError={(e) => (e.currentTarget.style.visibility = "hidden")}
-        />
+        {/* Logo: entra con fade-up y luego flota suavemente (loop infinito, solo transform) */}
+        <motion.div variants={fadeUp}>
+          <motion.img
+            src={`${import.meta.env.BASE_URL}logo.png`}
+            alt="La Central · Verdulería Boutique"
+            width="220"
+            height="220"
+            className="h-40 w-40 rounded-full object-cover shadow-[0_20px_50px_-20px_rgba(0,0,0,0.7)]"
+            animate={{ y: [0, -9, 0] }}
+            transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+            // Si el logo aun no fue colocado, no rompe el layout
+            onError={(e) => (e.currentTarget.style.visibility = "hidden")}
+          />
+        </motion.div>
 
         <motion.p
           variants={fadeUp}
@@ -73,12 +77,18 @@ export default function Hero({ onCtaClick }) {
           variants={fadeUp}
           type="button"
           onClick={onCtaClick}
+          whileTap={{ scale: 0.95 }}
           className="tap mt-8 inline-flex items-center gap-2 rounded-full bg-cream
-                     px-7 text-sm font-semibold text-ink active:scale-95
-                     transition-transform duration-150"
+                     px-7 text-sm font-semibold text-ink"
         >
           Armar mi pedido
-          <span aria-hidden="true">↓</span>
+          <motion.span
+            aria-hidden="true"
+            animate={{ y: [0, 4, 0] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+          >
+            ↓
+          </motion.span>
         </motion.button>
       </motion.div>
     </header>
