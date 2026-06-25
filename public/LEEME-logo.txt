@@ -1,0 +1,23 @@
+==========================================================
+  LOGO — YA GENERADO ✔
+==========================================================
+
+El logo ya está creado y en uso:
+
+    public/logo.png   (512x512, usado en Hero + favicon)
+    public/logo.svg   (vector editable, fuente del PNG)
+
+Es una reconstrucción vectorial del logo original (disco
+carbón, doble anillo, "LA CENTRAL" en arco, monograma LC y
+verduras a línea). No tenés que hacer nada más.
+
+----------------------------------------------------------
+¿Querés usar tu archivo original en su lugar?
+  Reemplazá public/logo.png por tu imagen (mismo nombre).
+  Recomendado: PNG cuadrado, 512x512.
+
+¿Querés retocar el vector (colores, texto, tamaños)?
+  Editá scripts/generate-logo.mjs y regenerá con:
+      npm install --no-save sharp
+      node scripts/generate-logo.mjs
+==========================================================

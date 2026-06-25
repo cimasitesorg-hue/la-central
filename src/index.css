@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Altura real de la barra inferior fija (CTA) + safe area del dispositivo */
+    --bottom-bar: 84px;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-cream text-ink font-sans antialiased;
+    /* Evita el "rebote" gris y mejora el render de fuentes en movil */
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Reset minimo de controles para look boutique consistente en iOS/Android */
+  button,
+  input,
+  select {
+    @apply font-sans;
+  }
+
+  /* Respeta usuarios que prefieren menos movimiento */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.001ms !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Zona tactil garantizada 44x44px (Apple HIG / WCAG) */
+  .tap {
+    @apply min-h-[44px] min-w-[44px];
+  }
+
+  /* Padding seguro inferior usando notch/gesture bar */
+  .safe-bottom {
+    padding-bottom: max(env(safe-area-inset-bottom), 12px);
+  }
+}

@@ -1,0 +1,89 @@
+import { useMemo, useRef, useState } from "react";
+import Hero from "./components/Hero.jsx";
+import About from "./components/About.jsx";
+import OrderForm from "./components/OrderForm.jsx";
+import StickyBar from "./components/StickyBar.jsx";
+import { clampQuantity } from "./utils/sanitize.js";
+import { buildWhatsappLink, getValidItems } from "./utils/whatsapp.js";
+
+let nextId = 1;
+const newItem = () => ({ id: nextId++, product: "", qty: 1 });
+
+export default function App() {
+  // Estado del carrito (fuente de verdad unica)
+  const [items, setItems] = useState([newItem()]);
+  const [error, setError] = useState("");
+  const pedidoRef = useRef(null);
+
+  const updateItem = (id, patch) => {
+    setError("");
+    setItems((prev) =>
+      prev.map((it) =>
+        it.id === id
+          ? {
+              ...it,
+              ...patch,
+              // si llega cantidad, la normalizamos en el acto
+              ...(patch.qty !== undefined ? { qty: clampQuantity(patch.qty) } : {}),
+            }
+          : it
+      )
+    );
+  };
+
+  const addItem = () => setItems((prev) => [...prev, newItem()]);
+
+  const removeItem = (id) =>
+    setItems((prev) => (prev.length > 1 ? prev.filter((it) => it.id !== id) : prev));
+
+  // Derivados: solo items validos cuentan para el resumen y el enlace
+  const validItems = useMemo(() => getValidItems(items), [items]);
+  const totalUnits = useMemo(
+    () => validItems.reduce((sum, it) => sum + it.qty, 0),
+    [validItems]
+  );
+  const link = useMemo(() => buildWhatsappLink(items), [items]);
+  const isEmpty = validItems.length === 0;
+
+  const scrollToPedido = () =>
+    pedidoRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+
+  const handleBlocked = () => {
+    setError("Elegí al menos un producto para enviar tu pedido.");
+    scrollToPedido();
+  };
+
+  return (
+    <div className="min-h-screen" style={{ paddingBottom: "var(--bottom-bar)" }}>
+      <Hero onCtaClick={scrollToPedido} />
+
+      <main>
+        <About />
+        <div ref={pedidoRef}>
+          <OrderForm
+            items={items}
+            onItemChange={updateItem}
+            onAddItem={addItem}
+            onRemoveItem={removeItem}
+            error={error}
+          />
+        </div>
+
+        <footer className="mx-auto max-w-app px-6 pb-8 pt-2 text-center">
+          <p className="font-display text-lg text-ink/80">La Central</p>
+          <p className="mt-1 text-xs text-ink/45">
+            Donato Álvarez 859, Caballito · CABA
+          </p>
+        </footer>
+      </main>
+
+      <StickyBar
+        itemCount={validItems.length}
+        totalUnits={totalUnits}
+        disabled={isEmpty}
+        href={link}
+        onBlocked={handleBlocked}
+      />
+    </div>
+  );
+}
