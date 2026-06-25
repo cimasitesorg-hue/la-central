@@ -3,6 +3,7 @@ import Hero from "./components/Hero.jsx";
 import About from "./components/About.jsx";
 import OrderForm from "./components/OrderForm.jsx";
 import StickyBar from "./components/StickyBar.jsx";
+import ScrollProgress from "./components/ScrollProgress.jsx";
 import { clampQuantity } from "./utils/sanitize.js";
 import { buildWhatsappLink, getValidItems } from "./utils/whatsapp.js";
 
@@ -55,6 +56,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen" style={{ paddingBottom: "var(--bottom-bar)" }}>
+      <ScrollProgress />
       <Hero onCtaClick={scrollToPedido} />
 
       <main>

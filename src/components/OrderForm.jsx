@@ -1,6 +1,16 @@
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Reveal from "./Reveal.jsx";
 import ProductRow from "./ProductRow.jsx";
+import SectionLabel from "./SectionLabel.jsx";
+
+const headerStagger = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
+};
+const headerItem = {
+  hidden: { opacity: 0, y: 14 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
+};
 
 /**
  * Seccion de pedidos. Recibe los items y handlers desde App (estado elevado)
@@ -9,17 +19,23 @@ import ProductRow from "./ProductRow.jsx";
 export default function OrderForm({ items, onItemChange, onAddItem, onRemoveItem, error }) {
   return (
     <section id="pedido" className="mx-auto max-w-app px-6 pb-6">
-      <Reveal>
-        <div className="text-center">
-          <span className="text-[11px] font-semibold uppercase tracking-[0.28em] text-sage">
-            Hacé tu pedido
-          </span>
-          <h2 className="mt-2 font-display text-3xl text-ink">Armá tu canasta</h2>
-          <p className="mt-2 text-sm text-ink/55">
-            Elegí los productos y la cantidad. Lo enviás por WhatsApp en un toque.
-          </p>
-        </div>
-      </Reveal>
+      <motion.div
+        variants={headerStagger}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.4 }}
+        className="text-center"
+      >
+        <motion.div variants={headerItem}>
+          <SectionLabel>Hacé tu pedido</SectionLabel>
+        </motion.div>
+        <motion.h2 variants={headerItem} className="mt-2 font-display text-3xl text-ink">
+          Armá tu canasta
+        </motion.h2>
+        <motion.p variants={headerItem} className="mt-2 text-sm text-ink/55">
+          Elegí los productos y la cantidad. Lo enviás por WhatsApp en un toque.
+        </motion.p>
+      </motion.div>
 
       <div className="mt-6 space-y-3">
         <AnimatePresence initial={false}>
@@ -42,16 +58,25 @@ export default function OrderForm({ items, onItemChange, onAddItem, onRemoveItem
         </p>
       )}
 
-      <button
+      <motion.button
         type="button"
         onClick={onAddItem}
+        initial="rest"
+        whileHover="hover"
+        whileTap={{ scale: 0.98 }}
         className="tap mt-4 flex w-full items-center justify-center gap-2 rounded-2xl
                    border border-dashed border-sage/40 bg-sage/5 text-sm font-semibold
-                   text-sage-dark active:scale-[0.99] transition-transform duration-150"
+                   text-sage-dark"
       >
-        <span className="text-lg leading-none">+</span>
+        <motion.span
+          className="text-lg leading-none"
+          variants={{ rest: { rotate: 0 }, hover: { rotate: 90 } }}
+          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+        >
+          +
+        </motion.span>
         Añadir otro producto
-      </button>
+      </motion.button>
     </section>
   );
 }

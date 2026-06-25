@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import Reveal from "./Reveal.jsx";
+import SectionLabel from "./SectionLabel.jsx";
 
 /**
  * Quienes somos: texto exacto requerido + info ampliada (valores, horarios,
@@ -46,9 +47,7 @@ export default function About() {
   return (
     <section id="nosotros" className="mx-auto max-w-app px-6 py-10">
       <Reveal className="rounded-3xl bg-white shadow-card p-6 text-center">
-        <span className="text-[11px] font-semibold uppercase tracking-[0.28em] text-sage">
-          Quiénes somos
-        </span>
+        <SectionLabel>Quiénes somos</SectionLabel>
 
         {/* Texto exacto requerido */}
         <p className="mt-3 font-display text-2xl leading-snug text-ink">

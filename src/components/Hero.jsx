@@ -20,12 +20,31 @@ export default function Hero({ onCtaClick }) {
 
   return (
     <header className="relative overflow-hidden bg-ink text-cream">
-      {/* Glow sutil para dar profundidad sin texturas pesadas */}
-      <div
+      {/* Glow que late suavemente (profundidad sin texturas pesadas) */}
+      <motion.div
         aria-hidden="true"
         className="pointer-events-none absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2
                    rounded-full bg-sage/20 blur-3xl"
+        animate={{ scale: [1, 1.18, 1], opacity: [0.5, 0.85, 0.5] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
       />
+
+      {/* Formas suaves flotando de fondo */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+        {[
+          { c: "left-6 top-24 h-16 w-16", d: 9, x: 10, y: -14 },
+          { c: "right-8 top-16 h-10 w-10", d: 7, x: -12, y: 10 },
+          { c: "right-12 bottom-10 h-20 w-20", d: 11, x: -8, y: -16 },
+          { c: "left-10 bottom-8 h-8 w-8", d: 8, x: 14, y: -10 },
+        ].map((s, i) => (
+          <motion.span
+            key={i}
+            className={`absolute rounded-full border border-sage/25 ${s.c}`}
+            animate={{ x: [0, s.x, 0], y: [0, s.y, 0], opacity: [0.25, 0.5, 0.25] }}
+            transition={{ duration: s.d, repeat: Infinity, ease: "easeInOut", delay: i * 0.6 }}
+          />
+        ))}
+      </div>
 
       <motion.div
         variants={container}

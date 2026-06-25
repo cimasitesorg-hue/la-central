@@ -7,6 +7,8 @@ import QuantityStepper from "./QuantityStepper.jsx";
  * viewport) + stepper de cantidad + boton de quitar.
  */
 export default function ProductRow({ item, index, canRemove, onChange, onRemove }) {
+  const selected = Boolean(item.product);
+
   return (
     <motion.div
       layout
@@ -14,8 +16,17 @@ export default function ProductRow({ item, index, canRemove, onChange, onRemove 
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -8, scale: 0.98 }}
       transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-      className="rounded-2xl bg-white shadow-card p-3"
+      className="relative overflow-hidden rounded-2xl bg-white shadow-card p-3"
     >
+      {/* Acento lateral que aparece al elegir un producto */}
+      <motion.span
+        aria-hidden="true"
+        className="absolute left-0 top-0 h-full w-1 origin-top bg-sage"
+        initial={false}
+        animate={{ scaleY: selected ? 1 : 0 }}
+        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+      />
+
       <div className="flex items-center gap-2">
         <div className="relative flex-1">
           <label htmlFor={`prod-${item.id}`} className="sr-only">
