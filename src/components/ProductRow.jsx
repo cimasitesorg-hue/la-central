@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { PRODUCT_GROUPS, OTHER_VALUE } from "../data/products.js";
+import { PRODUCT_GROUPS, OTHER_VALUE, DEFAULT_UNIT, getUnit } from "../data/products.js";
 import QuantityStepper from "./QuantityStepper.jsx";
 
 /**
@@ -8,6 +8,8 @@ import QuantityStepper from "./QuantityStepper.jsx";
  */
 export default function ProductRow({ item, index, canRemove, onChange, onRemove }) {
   const selected = Boolean(item.product);
+  // Unidad de venta del producto elegido (kg/un). "Otro" usa la unidad por defecto.
+  const unit = item.product === OTHER_VALUE ? DEFAULT_UNIT : getUnit(item.product);
 
   return (
     <motion.div
@@ -47,8 +49,8 @@ export default function ProductRow({ item, index, canRemove, onChange, onRemove 
             {PRODUCT_GROUPS.map((group) => (
               <optgroup key={group.label} label={group.label}>
                 {group.items.map((p) => (
-                  <option key={p} value={p}>
-                    {p}
+                  <option key={p.name} value={p.name}>
+                    {p.name}
                   </option>
                 ))}
               </optgroup>
@@ -74,6 +76,7 @@ export default function ProductRow({ item, index, canRemove, onChange, onRemove 
 
         <QuantityStepper
           value={item.qty}
+          unit={unit}
           onChange={(qty) => onChange(item.id, { qty })}
         />
       </div>
@@ -103,7 +106,7 @@ export default function ProductRow({ item, index, canRemove, onChange, onRemove 
                 onChange={(e) => onChange(item.id, { custom: e.target.value })}
                 placeholder="Escribí qué necesitás (ej. Rúcula baby, Albahaca…)"
                 className="tap w-full rounded-xl border border-sage/40 bg-sage/5
-                           px-3.5 text-[16px] font-medium text-ink placeholder:text-ink/35
+                           px-3.5 text-[16px] font-medium text-ink placeholder:text-ink/60
                            focus:outline-none focus:ring-2 focus:ring-sage/40
                            focus:border-sage transition-colors"
                 autoFocus
@@ -118,7 +121,7 @@ export default function ProductRow({ item, index, canRemove, onChange, onRemove 
           <button
             type="button"
             onClick={() => onRemove(item.id)}
-            className="text-xs font-medium text-ink/45 hover:text-sage-dark
+            className="text-xs font-medium text-ink/60 hover:text-sage-dark
                        transition-colors px-2 py-1 -mr-1"
           >
             Quitar

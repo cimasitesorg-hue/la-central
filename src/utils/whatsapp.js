@@ -2,7 +2,7 @@
 // Numero de la verduleria (formato internacional sin "+" ni espacios).
 
 import { sanitizeProduct, sanitizeText, clampQuantity } from "./sanitize.js";
-import { OTHER_VALUE } from "../data/products.js";
+import { OTHER_VALUE, DEFAULT_UNIT, getUnit } from "../data/products.js";
 
 export const WHATSAPP_NUMBER = "5491168940231";
 
@@ -15,11 +15,10 @@ export const WHATSAPP_NUMBER = "5491168940231";
 export function getValidItems(items = []) {
   return items
     .map((it) => {
-      const name =
-        it.product === OTHER_VALUE
-          ? sanitizeText(it.custom, 60)
-          : sanitizeProduct(it.product);
-      return { product: name, qty: clampQuantity(it.qty) };
+      const isOther = it.product === OTHER_VALUE;
+      const name = isOther ? sanitizeText(it.custom, 60) : sanitizeProduct(it.product);
+      const unit = isOther ? DEFAULT_UNIT : getUnit(it.product);
+      return { product: name, qty: clampQuantity(it.qty), unit };
     })
     .filter((it) => it.product !== "");
 }
@@ -27,7 +26,7 @@ export function getValidItems(items = []) {
 /** Arma el mensaje con el formato estructurado solicitado. */
 export function buildMessage(items = []) {
   const valid = getValidItems(items);
-  const lines = valid.map((it) => `- ${it.qty}x ${it.product}`).join("\n");
+  const lines = valid.map((it) => `- ${it.qty} ${it.unit} ${it.product}`).join("\n");
 
   return [
     "¡Hola! Quiero hacer el siguiente pedido:",

@@ -3,14 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <!--
-      Mobile-first critico:
-      maximum-scale=1 + user-scalable=no evita el zoom automatico
-      al tocar inputs numericos o desplegables en iOS/Android.
+      Mobile-first:
+      El zoom-al-tocar-inputs en iOS se evita con font-size>=16px en los campos
+      (ya aplicado en select/input), NO bloqueando el zoom del usuario. Permitir
+      pinch-zoom es un requisito de accesibilidad (WCAG 1.4.4 Resize Text).
       viewport-fit=cover habilita el uso de safe-area (notch / barra inferior).
     -->
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
     <meta name="theme-color" content="#101010" />
     <meta

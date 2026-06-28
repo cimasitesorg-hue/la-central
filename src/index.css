@@ -47,4 +47,72 @@
   .safe-bottom {
     padding-bottom: max(env(safe-area-inset-bottom), 12px);
   }
+
+  /* --- Marquee de reseñas (movimiento lineal continuo) --- */
+  .lc-marquee {
+    overflow: hidden;
+  }
+  .lc-marquee__track {
+    display: flex;
+    width: max-content;
+    animation: lc-marquee-x 44s linear infinite;
+  }
+  /* Pausar al pasar el mouse (solo en dispositivos con hover real). */
+  @media (hover: hover) and (pointer: fine) {
+    .lc-marquee:hover .lc-marquee__track {
+      animation-play-state: paused;
+    }
+    .lc-review {
+      transition:
+        transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.2s ease;
+    }
+    .lc-review:hover {
+      transform: translateY(-4px);
+    }
+  }
+
+  /* Ken Burns: zoom lento e infinito sobre las fotos del local. */
+  .lc-kenburns {
+    animation: lc-kenburns 18s ease-in-out infinite alternate;
+    transform-origin: center;
+  }
+}
+
+/* Keyframes a nivel raíz (no dentro de @layer). */
+@keyframes lc-marquee-x {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes lc-kenburns {
+  from {
+    scale: 1;
+  }
+  to {
+    scale: 1.08;
+  }
+}
+
+/*
+  Reduced-motion: apaga marquee y Ken Burns. El carril pasa a scroll horizontal
+  manual y se ocultan las tarjetas duplicadas (eran solo para el loop). El
+  !important vence a la regla global de animation-duration de @layer base.
+*/
+@media (prefers-reduced-motion: reduce) {
+  .lc-marquee {
+    overflow-x: auto;
+  }
+  .lc-marquee__track {
+    animation: none !important;
+    transform: none !important;
+    width: auto;
+  }
+  .lc-marquee__dup {
+    display: none !important;
+  }
+  .lc-kenburns {
+    animation: none !important;
+    scale: 1 !important;
+  }
 }

@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
  * Barra inferior fija (Sticky) siempre al alcance del pulgar.
  * CTA principal -> abre WhatsApp con el pedido. Se deshabilita si no hay items.
  */
-export default function StickyBar({ itemCount, totalUnits, disabled, href, onBlocked }) {
+export default function StickyBar({ itemCount, disabled, href, onBlocked }) {
   return (
     <div
       className="fixed inset-x-0 bottom-0 z-50 safe-bottom
@@ -14,12 +14,12 @@ export default function StickyBar({ itemCount, totalUnits, disabled, href, onBlo
       <div className="mx-auto max-w-app px-4 pt-3">
         <div className="flex items-center gap-3">
           <div className="min-w-0">
-            <p className="text-[11px] font-semibold uppercase tracking-wider text-ink/45">
+            <p className="text-[11px] font-semibold uppercase tracking-wider text-ink/60">
               Tu pedido
             </p>
             <AnimatePresence mode="popLayout" initial={false}>
               <motion.p
-                key={`${itemCount}-${totalUnits}`}
+                key={itemCount}
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -6 }}
@@ -28,15 +28,20 @@ export default function StickyBar({ itemCount, totalUnits, disabled, href, onBlo
               >
                 {itemCount === 0
                   ? "Sin productos aún"
-                  : `${itemCount} ${itemCount === 1 ? "producto" : "productos"} · ${totalUnits} u.`}
+                  : `${itemCount} ${itemCount === 1 ? "producto" : "productos"}`}
               </motion.p>
             </AnimatePresence>
           </div>
 
           <motion.a
-            href={disabled ? undefined : href}
+            // href siempre presente => el enlace queda en el tab-order y es
+            // accesible por teclado. Si está deshabilitado, el onClick (que en
+            // un <a> también dispara con Enter) corta la navegación con
+            // preventDefault y muestra el aviso.
+            href={href}
             target="_blank"
             rel="noopener noreferrer"
+            role="button"
             aria-disabled={disabled}
             whileTap={disabled ? undefined : { scale: 0.97 }}
             onClick={(e) => {
@@ -48,6 +53,8 @@ export default function StickyBar({ itemCount, totalUnits, disabled, href, onBlo
             className={
               "tap ml-auto flex flex-1 items-center justify-center gap-2 rounded-full " +
               "px-5 text-sm font-bold transition-colors duration-200 " +
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-whatsapp/60 " +
+              "focus-visible:ring-offset-2 focus-visible:ring-offset-cream " +
               (disabled
                 ? "bg-ink/15 text-ink/40 cursor-not-allowed"
                 : "bg-whatsapp text-white shadow-lg shadow-whatsapp/25")

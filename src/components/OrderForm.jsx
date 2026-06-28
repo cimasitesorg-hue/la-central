@@ -32,7 +32,7 @@ export default function OrderForm({ items, onItemChange, onAddItem, onRemoveItem
         <motion.h2 variants={headerItem} className="mt-2 font-display text-3xl text-ink">
           Armá tu canasta
         </motion.h2>
-        <motion.p variants={headerItem} className="mt-2 text-sm text-ink/55">
+        <motion.p variants={headerItem} className="mt-2 text-sm text-ink/70">
           Elegí los productos y la cantidad. Lo enviás por WhatsApp en segundos.
         </motion.p>
 
@@ -72,7 +72,18 @@ export default function OrderForm({ items, onItemChange, onAddItem, onRemoveItem
       </div>
 
       {error && (
-        <p role="alert" className="mt-3 text-center text-sm font-medium text-sage-dark">
+        <p
+          role="alert"
+          className="mt-3 flex items-center justify-center gap-1.5 text-center
+                     text-sm font-semibold text-clay"
+        >
+          <svg viewBox="0 0 24 24" className="h-4 w-4 shrink-0" fill="none"
+               stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"
+               strokeLinejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 8v4" />
+            <path d="M12 16h.01" />
+          </svg>
           {error}
         </p>
       )}
@@ -85,7 +96,9 @@ export default function OrderForm({ items, onItemChange, onAddItem, onRemoveItem
         whileTap={{ scale: 0.98 }}
         className="tap mt-4 flex w-full items-center justify-center gap-2 rounded-2xl
                    border border-dashed border-sage/40 bg-sage/5 text-sm font-semibold
-                   text-sage-dark"
+                   text-sage-dark focus-visible:outline-none focus-visible:ring-2
+                   focus-visible:ring-sage/50 focus-visible:ring-offset-2
+                   focus-visible:ring-offset-cream"
       >
         <motion.span
           className="text-lg leading-none"

@@ -1,7 +1,10 @@
 import { useMemo, useRef, useState } from "react";
 import Hero from "./components/Hero.jsx";
 import About from "./components/About.jsx";
+import PhotoShowcase from "./components/PhotoShowcase.jsx";
 import OrderForm from "./components/OrderForm.jsx";
+import Reviews from "./components/Reviews.jsx";
+import GoogleReviews from "./components/GoogleReviews.jsx";
 import StickyBar from "./components/StickyBar.jsx";
 import ScrollProgress from "./components/ScrollProgress.jsx";
 import { clampQuantity } from "./utils/sanitize.js";
@@ -39,10 +42,6 @@ export default function App() {
 
   // Derivados: solo items validos cuentan para el resumen y el enlace
   const validItems = useMemo(() => getValidItems(items), [items]);
-  const totalUnits = useMemo(
-    () => validItems.reduce((sum, it) => sum + it.qty, 0),
-    [validItems]
-  );
   const link = useMemo(() => buildWhatsappLink(items), [items]);
   const isEmpty = validItems.length === 0;
 
@@ -61,6 +60,7 @@ export default function App() {
 
       <main>
         <About />
+        <PhotoShowcase />
         <div ref={pedidoRef}>
           <OrderForm
             items={items}
@@ -71,9 +71,12 @@ export default function App() {
           />
         </div>
 
+        <Reviews />
+        <GoogleReviews />
+
         <footer className="mx-auto max-w-app px-6 pb-8 pt-2 text-center">
           <p className="font-display text-lg text-ink/80">La Central</p>
-          <p className="mt-1 text-xs text-ink/45">
+          <p className="mt-1 text-xs text-ink/60">
             Donato Álvarez 859, Caballito · CABA
           </p>
         </footer>
@@ -81,7 +84,6 @@ export default function App() {
 
       <StickyBar
         itemCount={validItems.length}
-        totalUnits={totalUnits}
         disabled={isEmpty}
         href={link}
         onBlocked={handleBlocked}

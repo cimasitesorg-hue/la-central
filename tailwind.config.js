@@ -20,6 +20,12 @@ export default {
           dark: "#3C553F",
         },
         whatsapp: "#1FA855", // verde sobrio para el CTA (no estridente)
+        // Color funcional de alerta/error: terracota sobrio (no el rojo de super).
+        // Dialoga con el terracota de los cajones de fruta del local.
+        clay: {
+          DEFAULT: "#A23C1E",
+          soft: "rgba(162,60,30,0.10)",
+        },
       },
       fontFamily: {
         display: ['"Fraunces"', "Georgia", "serif"],

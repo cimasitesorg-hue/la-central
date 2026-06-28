@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-28T00:00:00.000Z",
+  "title": "Design System: La Central",
+  "extensions": {
+    "colorMeta": {
+      "ink": { "role": "primary", "displayName": "Carbón de Vidriera", "canonical": "#101010", "tonalRamp": ["#000000", "#0a0a0a", "#101010", "#1c1c1c", "#2e2e2e", "#5a5a5a", "#9a9a9a", "#e6e4df"] },
+      "cream": { "role": "neutral", "displayName": "Crema Cálida", "canonical": "#F7F4EF", "tonalRamp": ["#2a2823", "#4a463e", "#6e6859", "#9a9384", "#c8c1b2", "#e4ded2", "#F7F4EF", "#fdfcf9"] },
+      "cream-deep": { "role": "neutral", "displayName": "Crema Profunda", "canonical": "#EFEAE1", "tonalRamp": ["#2a2823", "#4a463e", "#6e6859", "#9a9384", "#c0b8a8", "#dcd5c8", "#EFEAE1", "#faf7f1"] },
+      "sage": { "role": "secondary", "displayName": "Sage de Huerta", "canonical": "#4F6F52", "tonalRamp": ["#1a2a1c", "#283f2a", "#3C553F", "#4F6F52", "#658766", "#7E9A7E", "#a5bba4", "#d6e2d5"] },
+      "whatsapp": { "role": "tertiary", "displayName": "Verde WhatsApp", "canonical": "#1FA855", "tonalRamp": ["#0a3d1f", "#0f5a2d", "#15803c", "#1FA855", "#34c46c", "#5dd589", "#92e5af", "#d4f5e0"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display (Fraunces)", "purpose": "Solo títulos de hero y momentos de marca." },
+      "headline": { "displayName": "Headline (Fraunces)", "purpose": "Títulos de sección." },
+      "body": { "displayName": "Body (Manrope)", "purpose": "Toda la prosa y la UI." },
+      "label": { "displayName": "Label (Manrope mayúsculas)", "purpose": "Etiquetas de sección y eyebrow, en sage." }
+    },
+    "shadows": [
+      { "name": "card", "value": "0 1px 2px rgba(16,16,16,0.04), 0 8px 24px -12px rgba(16,16,16,0.18)", "purpose": "Eleva cards blancas sobre la crema; ambiente, no estructura." },
+      { "name": "bar", "value": "0 -8px 30px -12px rgba(16,16,16,0.25)", "purpose": "Despega la barra fija inferior del contenido al hacer scroll." },
+      { "name": "cta-glow", "value": "0 10px 25px -8px rgba(31,168,85,0.25)", "purpose": "Halo verde bajo el CTA de WhatsApp activo." }
+    ],
+    "motion": [
+      { "name": "ease-out-expo", "value": "cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "Easing estándar de todas las entradas y transiciones de estado." },
+      { "name": "fade-up", "value": "opacity 0→1, translateY 16px→0, 0.5–0.7s", "purpose": "Entrada escalonada de bloques (hero, secciones)." }
+    ],
+    "breakpoints": [
+      { "name": "app", "value": "520px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "CTA WhatsApp",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Botón principal de envío del pedido; el ícono respira cuando hay items.",
+      "html": "<a class=\"ds-cta-whatsapp\" href=\"#\"><svg viewBox=\"0 0 24 24\" width=\"20\" height=\"20\" aria-hidden=\"true\"><path fill=\"currentColor\" d=\"M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 0 1 8.413 3.488 11.82 11.82 0 0 1 3.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24z\"/></svg>Hacer Pedido por WhatsApp</a>",
+      "css": ".ds-cta-whatsapp { display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:44px; padding:0 20px; border-radius:9999px; background:#1FA855; color:#fff; font-family:Manrope,system-ui,sans-serif; font-weight:700; font-size:0.875rem; text-decoration:none; box-shadow:0 10px 25px -8px rgba(31,168,85,0.25); transition:background .2s, transform .2s; } .ds-cta-whatsapp:hover { background:#15803c; } .ds-cta-whatsapp:active { transform:scale(0.97); } .ds-cta-whatsapp:focus-visible { outline:2px solid #1FA855; outline-offset:2px; }"
+    },
+    {
+      "name": "Hero CTA",
+      "kind": "button",
+      "refersTo": "button-hero",
+      "description": "Píldora crema sobre el hero carbón; arranca el armado del pedido.",
+      "html": "<button class=\"ds-cta-hero\">Armar mi pedido <span aria-hidden=\"true\">↓</span></button>",
+      "css": ".ds-cta-hero { display:inline-flex; align-items:center; gap:8px; min-height:44px; padding:0 28px; border:none; border-radius:9999px; background:#F7F4EF; color:#101010; font-family:Manrope,system-ui,sans-serif; font-weight:600; font-size:0.875rem; cursor:pointer; transition:transform .15s; } .ds-cta-hero:active { transform:scale(0.95); } .ds-cta-hero:focus-visible { outline:2px solid #7E9A7E; outline-offset:2px; }"
+    },
+    {
+      "name": "Añadir producto",
+      "kind": "button",
+      "refersTo": "button-add",
+      "description": "Acción secundaria de ancho completo con borde punteado sage.",
+      "html": "<button class=\"ds-btn-add\"><span class=\"ds-btn-add__plus\">+</span> Añadir otro producto</button>",
+      "css": ".ds-btn-add { display:flex; width:100%; align-items:center; justify-content:center; gap:8px; min-height:44px; padding:14px 16px; border:1px dashed rgba(79,111,82,0.4); border-radius:1rem; background:rgba(79,111,82,0.05); color:#3C553F; font-family:Manrope,system-ui,sans-serif; font-weight:600; font-size:0.875rem; cursor:pointer; transition:transform .15s, background .2s; } .ds-btn-add__plus { font-size:1.125rem; line-height:1; transition:transform .3s cubic-bezier(0.22,1,0.36,1); } .ds-btn-add:hover .ds-btn-add__plus { transform:rotate(90deg); } .ds-btn-add:active { transform:scale(0.98); }"
+    },
+    {
+      "name": "Select de producto",
+      "kind": "input",
+      "refersTo": "input-select",
+      "description": "Select nativo (sin zoom iOS) con chevron sage y foco sage.",
+      "html": "<div class=\"ds-select-wrap\"><select class=\"ds-select\"><option>Elegí un producto…</option></select><svg class=\"ds-select__chev\" viewBox=\"0 0 20 20\" width=\"16\" height=\"16\" aria-hidden=\"true\"><path d=\"M6 8l4 4 4-4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></div>",
+      "css": ".ds-select-wrap { position:relative; } .ds-select { width:100%; min-height:44px; appearance:none; padding:0 36px 0 14px; border:1px solid #EFEAE1; border-radius:0.75rem; background:rgba(247,244,239,0.6); color:#101010; font-family:Manrope,system-ui,sans-serif; font-weight:500; font-size:16px; transition:border-color .2s, box-shadow .2s; } .ds-select:focus { outline:none; border-color:rgba(79,111,82,0.4); box-shadow:0 0 0 2px rgba(79,111,82,0.4); } .ds-select__chev { position:absolute; right:12px; top:50%; transform:translateY(-50%); color:rgba(16,16,16,0.5); pointer-events:none; }"
+    },
+    {
+      "name": "Stepper de cantidad",
+      "kind": "custom",
+      "refersTo": "stepper-button",
+      "description": "Botones grandes − / + con valor central de solo lectura (sin teclado móvil).",
+      "html": "<div class=\"ds-stepper\" role=\"group\" aria-label=\"Cantidad\"><button class=\"ds-stepper__btn\" aria-label=\"Restar uno\">−</button><span class=\"ds-stepper__val\">2</span><button class=\"ds-stepper__btn\" aria-label=\"Sumar uno\">+</button></div>",
+      "css": ".ds-stepper { display:inline-flex; align-items:center; gap:6px; } .ds-stepper__btn { display:flex; align-items:center; justify-content:center; min-width:44px; min-height:44px; border:none; border-radius:0.75rem; background:#EFEAE1; color:#101010; font-family:Manrope,system-ui,sans-serif; font-size:1.25rem; font-weight:600; cursor:pointer; user-select:none; transition:transform .12s; } .ds-stepper__btn:active { transform:scale(0.88); } .ds-stepper__btn:disabled { opacity:0.4; cursor:default; } .ds-stepper__val { min-width:44px; text-align:center; font-family:Manrope,system-ui,sans-serif; font-weight:600; font-size:1rem; font-variant-numeric:tabular-nums; }"
+    },
+    {
+      "name": "Card de pedido",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Fila de pedido blanca con acento sage de estado a la izquierda (visible al seleccionar).",
+      "html": "<div class=\"ds-card-order ds-card-order--selected\"><span class=\"ds-card-order__accent\" aria-hidden=\"true\"></span>Tomate · 2 u.</div>",
+      "css": ".ds-card-order { position:relative; overflow:hidden; padding:12px 12px 12px 16px; border-radius:1rem; background:#fff; box-shadow:0 1px 2px rgba(16,16,16,0.04), 0 8px 24px -12px rgba(16,16,16,0.18); font-family:Manrope,system-ui,sans-serif; font-size:0.875rem; color:#101010; } .ds-card-order__accent { position:absolute; left:0; top:0; height:100%; width:4px; background:#4F6F52; transform:scaleY(0); transform-origin:top; transition:transform .3s cubic-bezier(0.22,1,0.36,1); } .ds-card-order--selected .ds-card-order__accent { transform:scaleY(1); }"
+    },
+    {
+      "name": "Barra fija inferior",
+      "kind": "nav",
+      "refersTo": "card",
+      "description": "Ancla persistente: resumen del pedido en vivo + CTA, con backdrop-blur.",
+      "html": "<div class=\"ds-stickybar\"><div class=\"ds-stickybar__summary\"><p class=\"ds-stickybar__label\">Tu pedido</p><p class=\"ds-stickybar__count\">2 productos · 3 u.</p></div><a class=\"ds-cta-whatsapp\" href=\"#\">Hacer Pedido por WhatsApp</a></div>",
+      "css": ".ds-stickybar { display:flex; align-items:center; gap:12px; padding:12px 16px; background:rgba(247,244,239,0.85); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px); border-top:1px solid #EFEAE1; box-shadow:0 -8px 30px -12px rgba(16,16,16,0.25); } .ds-stickybar__label { margin:0; font-family:Manrope,system-ui,sans-serif; font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.05em; color:rgba(16,16,16,0.45); } .ds-stickybar__count { margin:0; font-family:Manrope,system-ui,sans-serif; font-size:0.875rem; font-weight:600; color:#101010; } .ds-stickybar .ds-cta-whatsapp { margin-left:auto; flex:1; display:inline-flex; align-items:center; justify-content:center; min-height:44px; padding:0 20px; border-radius:9999px; background:#1FA855; color:#fff; font-weight:700; font-size:0.875rem; text-decoration:none; }"
+    },
+    {
+      "name": "Etiqueta de sección",
+      "kind": "custom",
+      "refersTo": "button-add",
+      "description": "Eyebrow en sage con subrayado que se dibuja al entrar en pantalla.",
+      "html": "<span class=\"ds-section-label\">Hacé tu pedido<span class=\"ds-section-label__underline\" aria-hidden=\"true\"></span></span>",
+      "css": ".ds-section-label { position:relative; display:inline-block; font-family:Manrope,system-ui,sans-serif; font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.28em; color:#4F6F52; } .ds-section-label__underline { position:absolute; left:0; bottom:-6px; width:100%; height:1px; background:rgba(79,111,82,0.5); transform:scaleX(1); transform-origin:left; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "La Vidriera de Noche",
+    "overview": "La Central es una verdulería boutique de Caballito cuya fachada es, literalmente, carbón: un frente negro mate del que se desbordan cajones de fruta encendida hacia la vereda. El lienzo es oscuro y sobrio (ink #101010); el color y la vida los pone el producto, como joyas iluminadas contra la noche. Adentro, estantería negra con baldas de madera cálida sostiene aceites, vinos y conservas: una góndola curada, no un mayorista. El diseño existe para transmitir esa selección y cerrar un pedido por WhatsApp sin fricción. La personalidad es boutique, fresca y de barrio: elegante pero cálida, nunca pretenciosa. El refinamiento llega por la tipografía, el verde sage y el aire en blanco, nunca por textura pesada.",
+    "keyCharacteristics": [
+      "Lienzo carbón; el producto (imágenes) carga el color saturado.",
+      "Verde sage como única firma cromática de la UI; uso disciplinado.",
+      "Serif editorial + sans humanista, en eje de contraste real.",
+      "Mobile-first estricto: 520px, zonas táctiles ≥44px, CTA siempre al alcance.",
+      "Refinado y táctil: bordes suaves, sombra sutil, respuesta al toque."
+    ],
+    "rules": [
+      { "name": "The Producto-es-Color Rule", "body": "La saturación vive en la fotografía de la mercadería, no en la UI. El chrome se queda en carbón, crema y un único verde. Si una pantalla necesita más color, se agrega producto, no acentos.", "section": "colors" },
+      { "name": "The Dos Verdes Rule", "body": "Hay exactamente dos verdes con trabajos distintos: sage = identidad de marca; WhatsApp = acción de envío. Nunca intercambiables.", "section": "colors" },
+      { "name": "The Fraunces-para-Marca Rule", "body": "Fraunces se reserva para títulos y momentos de marca. La UI funcional es Manrope siempre. Nunca serif en controles.", "section": "typography" },
+      { "name": "The Sombra-Ambiente Rule", "body": "Las sombras son tibias y difusas (carbón a baja opacidad, blur grande), nunca duras. Si se ve el borde de la sombra, está mal: subir el blur y bajar la opacidad.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do mantener el chrome en carbón, crema y un solo sage; dejar que el color saturado lo aporte la fotografía del producto.",
+      "Do reservar Fraunces para títulos y momentos de marca; Manrope para toda la UI.",
+      "Do usar los dos verdes con sus trabajos fijos: sage = marca, WhatsApp = envío.",
+      "Do garantizar 44×44px en todo control y mantener el CTA siempre alcanzable con el pulgar.",
+      "Do mantener sombras tibias y difusas.",
+      "Do verificar contraste real de los grises de texto (ink/45, ink/55, cream/70, placeholder ink/35); subir hacia el ink si quedan bajo 4.5:1.",
+      "Do dar alternativa estática a cada animación (prefers-reduced-motion)."
+    ],
+    "donts": [
+      "Don't parecerse a un súper genérico / mayorista: nada de rojo+amarillo, ofertas gritadas, ni catálogos saturados de SKUs.",
+      "Don't caer en estética de app de delivery (PedidosYa/Rappi): grillas infinitas de cards con badges, naranjas chillones.",
+      "Don't volverse corporativo / frío: azul fintech, lenguaje institucional, stock photos sin alma.",
+      "Don't recargar con artesanal-rústico cliché: kraft, sellos, pizarrón, texturas pesadas.",
+      "Don't introducir un tercer color de marca ni teñir neutros porque sí.",
+      "Don't usar barras laterales de color como adorno fijo en cards/listas; la única excepción es el acento sage de 4px de la fila de pedido por ser indicador de estado animado.",
+      "Don't poner serif en controles, ni clamp de display por encima de ~2.6rem."
+    ]
+  }
+}

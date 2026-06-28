@@ -49,13 +49,13 @@ export default function About() {
       <Reveal className="rounded-3xl bg-white shadow-card p-6 text-center">
         <SectionLabel>Quiénes somos</SectionLabel>
 
-        {/* Texto exacto requerido */}
-        <p className="mt-3 font-display text-2xl leading-snug text-ink">
+        {/* Texto exacto requerido (heading real de la sección) */}
+        <h2 className="mt-3 font-display text-2xl leading-snug text-ink">
           Verdulería boutique con la mejor calidad y variedad de productos.
-        </p>
+        </h2>
 
         {/* Info ampliada */}
-        <p className="mt-3 text-sm leading-relaxed text-ink/60">
+        <p className="mt-3 text-sm leading-relaxed text-ink/70">
           En La Central elegimos cada producto a mano para que te lleves siempre
           lo mejor: frutas, verduras y de estación, frescas todos los días. Un
           espacio cuidado, pensado para que comprar saludable sea simple y
@@ -68,13 +68,13 @@ export default function About() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.3 }}
-          className="mt-6 space-y-3 text-left"
+          className="mt-6 divide-y divide-cream-deep text-left"
         >
           {FEATURES.map((f) => (
             <motion.li
               key={f.title}
               variants={fadeItem}
-              className="flex items-start gap-3 rounded-2xl bg-cream/70 p-3"
+              className="flex items-start gap-3 py-3 first:pt-0 last:pb-0"
             >
               <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-sage/12">
                 <svg
@@ -94,7 +94,7 @@ export default function About() {
                 <span className="block text-sm font-semibold text-ink">
                   {f.title}
                 </span>
-                <span className="block text-xs leading-relaxed text-ink/55">
+                <span className="block text-xs leading-relaxed text-ink/70">
                   {f.text}
                 </span>
               </span>
@@ -124,7 +124,10 @@ export default function About() {
           rel="noopener noreferrer"
           className="tap mt-4 inline-flex items-center justify-center gap-2 rounded-full
                      bg-cream px-5 text-sm font-medium text-ink/80
-                     active:scale-95 transition-transform duration-150"
+                     active:scale-95 transition-transform duration-150
+                     focus-visible:outline-none focus-visible:ring-2
+                     focus-visible:ring-sage/50 focus-visible:ring-offset-2
+                     focus-visible:ring-offset-white"
         >
           <svg viewBox="0 0 24 24" className="h-4 w-4 text-sage" aria-hidden="true">
             <path

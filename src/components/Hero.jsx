@@ -77,7 +77,7 @@ export default function Hero({ onCtaClick }) {
 
         <motion.h1
           variants={fadeUp}
-          className="mt-3 font-display text-[2.6rem] leading-[1.05] font-medium"
+          className="mt-3 font-display text-[clamp(2rem,8vw,2.6rem)] leading-[1.05] font-medium"
         >
           Frescura que se
           <br />
@@ -98,7 +98,10 @@ export default function Hero({ onCtaClick }) {
           onClick={onCtaClick}
           whileTap={{ scale: 0.95 }}
           className="tap mt-8 inline-flex items-center gap-2 rounded-full bg-cream
-                     px-7 text-sm font-semibold text-ink"
+                     px-7 text-sm font-semibold text-ink
+                     focus-visible:outline-none focus-visible:ring-2
+                     focus-visible:ring-sage-light focus-visible:ring-offset-2
+                     focus-visible:ring-offset-ink"
         >
           Armar mi pedido
           <motion.span
