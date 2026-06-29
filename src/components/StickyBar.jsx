@@ -1,12 +1,33 @@
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 /**
  * Barra inferior fija (Sticky) siempre al alcance del pulgar.
+ * - Entra deslizándose desde abajo (curva tipo iOS) la primera vez.
+ * - El CTA hace un "shine" de una sola pasada cuando el pedido pasa de vacío a
+ *   listo: indicación de estado ("ya podés enviar"), no decorado infinito.
  * CTA principal -> abre WhatsApp con el pedido. Se deshabilita si no hay items.
  */
 export default function StickyBar({ itemCount, disabled, href, onBlocked }) {
+  const [shine, setShine] = useState(false);
+  const prevDisabled = useRef(disabled);
+
+  useEffect(() => {
+    // Solo al transicionar de deshabilitado (vacío) a habilitado (hay pedido).
+    if (prevDisabled.current && !disabled) {
+      setShine(true);
+      const t = setTimeout(() => setShine(false), 850);
+      prevDisabled.current = disabled;
+      return () => clearTimeout(t);
+    }
+    prevDisabled.current = disabled;
+  }, [disabled]);
+
   return (
-    <div
+    <motion.div
+      initial={{ y: "100%" }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
       className="fixed inset-x-0 bottom-0 z-50 safe-bottom
                  bg-cream/85 backdrop-blur-md shadow-bar
                  border-t border-cream-deep"
@@ -51,13 +72,14 @@ export default function StickyBar({ itemCount, disabled, href, onBlocked }) {
               }
             }}
             className={
-              "tap ml-auto flex flex-1 items-center justify-center gap-2 rounded-full " +
-              "px-5 text-sm font-bold transition-colors duration-200 " +
+              "tap relative ml-auto flex flex-1 items-center justify-center gap-2 " +
+              "overflow-hidden rounded-full px-5 text-sm font-bold transition-colors duration-200 " +
               "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-whatsapp/60 " +
               "focus-visible:ring-offset-2 focus-visible:ring-offset-cream " +
               (disabled
                 ? "bg-ink/15 text-ink/40 cursor-not-allowed"
-                : "bg-whatsapp text-white shadow-lg shadow-whatsapp/25")
+                : "bg-whatsapp text-white shadow-lg shadow-whatsapp/25 lc-shine ") +
+              (shine ? "lc-shine--run" : "")
             }
           >
             {/* El icono "respira" suavemente cuando hay pedido, para llamar la atencion */}
@@ -81,6 +103,6 @@ export default function StickyBar({ itemCount, disabled, href, onBlocked }) {
           </motion.a>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
-import SectionLabel from "./SectionLabel.jsx";
+import HeadingReveal from "./HeadingReveal.jsx";
+import Reveal from "./Reveal.jsx";
 
 /**
  * Galería del local con motion en capas:
@@ -27,7 +28,7 @@ const PHOTOS = [
   },
 ];
 
-function ParallaxPhoto({ src, alt, caption }) {
+function ParallaxPhoto({ src, alt, caption, delay = 0 }) {
   const ref = useRef(null);
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({
@@ -43,7 +44,7 @@ function ParallaxPhoto({ src, alt, caption }) {
       initial={{ opacity: 0, clipPath: "inset(10% 10% 10% 10% round 24px)" }}
       whileInView={{ opacity: 1, clipPath: "inset(0% 0% 0% 0% round 24px)" }}
       viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.9, delay, ease: [0.22, 1, 0.36, 1] }}
       className="relative overflow-hidden rounded-3xl bg-ink shadow-card"
     >
       <div className="relative aspect-[4/5] overflow-hidden">
@@ -73,16 +74,19 @@ export default function PhotoShowcase() {
   return (
     <section id="local" className="mx-auto max-w-app px-6 py-8">
       <div className="text-center">
-        <SectionLabel>El local</SectionLabel>
-        <h2 className="mt-2 font-display text-3xl text-ink">Pasá a conocernos</h2>
-        <p className="mt-2 text-sm leading-relaxed text-ink/70">
-          Un espacio cuidado en el corazón de Caballito, con lo mejor de cada día.
-        </p>
+        <HeadingReveal className="font-display text-3xl text-ink">
+          Pasá a conocernos
+        </HeadingReveal>
+        <Reveal delay={0.15} y={14} blur={4} className="mt-2">
+          <p className="text-sm leading-relaxed text-ink/70">
+            Un espacio cuidado en el corazón de Caballito, con lo mejor de cada día.
+          </p>
+        </Reveal>
       </div>
 
       <div className="mt-6 space-y-5">
-        {PHOTOS.map((p) => (
-          <ParallaxPhoto key={p.src} {...p} />
+        {PHOTOS.map((p, i) => (
+          <ParallaxPhoto key={p.src} {...p} delay={i * 0.08} />
         ))}
       </div>
     </section>

@@ -18,17 +18,10 @@ export default function ProductRow({ item, index, canRemove, onChange, onRemove 
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -8, scale: 0.98 }}
       transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-      className="relative overflow-hidden rounded-2xl bg-white shadow-card p-3"
+      className={`relative overflow-hidden rounded-2xl bg-white p-3 shadow-card transition-shadow duration-300 ${
+        selected ? "ring-1 ring-sage/50" : ""
+      }`}
     >
-      {/* Acento lateral que aparece al elegir un producto */}
-      <motion.span
-        aria-hidden="true"
-        className="absolute left-0 top-0 h-full w-1 origin-top bg-sage"
-        initial={false}
-        animate={{ scaleY: selected ? 1 : 0 }}
-        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-      />
-
       <div className="flex items-center gap-2">
         <div className="relative flex-1">
           <label htmlFor={`prod-${item.id}`} className="sr-only">
@@ -121,8 +114,9 @@ export default function ProductRow({ item, index, canRemove, onChange, onRemove 
           <button
             type="button"
             onClick={() => onRemove(item.id)}
-            className="text-xs font-medium text-ink/60 hover:text-sage-dark
-                       transition-colors px-2 py-1 -mr-1"
+            className="tap -mr-1 inline-flex items-center justify-center rounded-lg px-2
+                       text-xs font-medium text-ink/60 transition-colors hover:text-sage-dark
+                       focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sage/40"
           >
             Quitar
           </button>

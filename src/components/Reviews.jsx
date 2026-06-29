@@ -1,5 +1,4 @@
 import Reveal from "./Reveal.jsx";
-import SectionLabel from "./SectionLabel.jsx";
 import { GoogleG } from "./GoogleLogo.jsx";
 
 /**
@@ -108,13 +107,11 @@ export default function Reviews() {
   return (
     <section id="opiniones" className="py-8">
       <Reveal className="mx-auto max-w-app px-6 text-center">
-        <SectionLabel>Opiniones</SectionLabel>
-        <h2 className="mt-2 font-display text-3xl text-ink">
+        <h2 className="font-display text-3xl text-ink">
           Lo que dicen los vecinos
         </h2>
-        <p className="mt-2 flex items-center justify-center gap-1.5 text-sm text-ink/70">
-          <GoogleG className="h-4 w-4" />
-          Reseñas reales en Google
+        <p className="mt-2 text-sm text-ink/70">
+          Opiniones de quienes nos eligen cada día.
         </p>
       </Reveal>
 

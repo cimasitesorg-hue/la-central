@@ -10,11 +10,22 @@ export default function Hero({ onCtaClick }) {
     show: { transition: { staggerChildren: 0.14, delayChildren: 0.1 } },
   };
   const fadeUp = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 20, filter: "blur(8px)" },
     show: {
       opacity: 1,
       y: 0,
+      filter: "blur(0px)",
       transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+    },
+  };
+  // El logo entra con un leve "enfoque" (escala + blur). Nunca desde scale(0).
+  const fadeScale = {
+    hidden: { opacity: 0, scale: 0.92, filter: "blur(10px)" },
+    show: {
+      opacity: 1,
+      scale: 1,
+      filter: "blur(0px)",
+      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
     },
   };
 
@@ -53,8 +64,8 @@ export default function Hero({ onCtaClick }) {
         className="relative mx-auto flex max-w-app flex-col items-center
                    px-6 pt-14 pb-12 text-center"
       >
-        {/* Logo: entra con fade-up y luego flota suavemente (loop infinito, solo transform) */}
-        <motion.div variants={fadeUp}>
+        {/* Logo: entra con escala + blur y luego flota suavemente (loop infinito, solo transform) */}
+        <motion.div variants={fadeScale}>
           <motion.img
             src={`${import.meta.env.BASE_URL}logo.png`}
             alt="La Central · Verdulería Boutique"

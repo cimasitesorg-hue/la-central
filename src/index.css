@@ -6,6 +6,11 @@
   :root {
     /* Altura real de la barra inferior fija (CTA) + safe area del dispositivo */
     --bottom-bar: 84px;
+
+    /* Curvas de easing fuertes (Emil): las nativas de CSS son demasiado débiles. */
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1); /* entradas: arranca rápido, se siente responsive */
+    --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1); /* movimiento en pantalla */
+    --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1); /* tipo iOS, para barras/drawers */
   }
 
   html {
@@ -95,6 +100,36 @@
 }
 
 /*
+  Brillo que barre el CTA una sola vez cuando el pedido pasa a "listo".
+  Indicación de estado (Emil): comunica "ya podés enviar", no es decorado infinito.
+*/
+@keyframes lc-shine {
+  from {
+    transform: translateX(-150%) skewX(-16deg);
+  }
+  to {
+    transform: translateX(260%) skewX(-16deg);
+  }
+}
+.lc-shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    100deg,
+    transparent 38%,
+    rgba(255, 255, 255, 0.45) 50%,
+    transparent 62%
+  );
+  transform: translateX(-150%) skewX(-16deg);
+  pointer-events: none;
+}
+.lc-shine--run::after {
+  animation: lc-shine 0.85s var(--ease-out) 1;
+}
+
+/*
   Reduced-motion: apaga marquee y Ken Burns. El carril pasa a scroll horizontal
   manual y se ocultan las tarjetas duplicadas (eran solo para el loop). El
   !important vence a la regla global de animation-duration de @layer base.
@@ -114,5 +149,8 @@
   .lc-kenburns {
     animation: none !important;
     scale: 1 !important;
+  }
+  .lc-shine--run::after {
+    animation: none !important;
   }
 }
