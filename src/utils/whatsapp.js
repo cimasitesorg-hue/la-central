@@ -4,7 +4,7 @@
 import { sanitizeProduct, sanitizeText, clampQuantity } from "./sanitize.js";
 import { OTHER_VALUE, DEFAULT_UNIT, getUnit } from "../data/products.js";
 
-export const WHATSAPP_NUMBER = "5491168940231";
+export const WHATSAPP_NUMBER = "5491125427228";
 
 /**
  * Filtra y normaliza los items del carrito.
