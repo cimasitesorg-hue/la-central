@@ -36,22 +36,27 @@ export default function OrderForm({ items, address, onAddressChange, onItemChang
           Elegí los productos y la cantidad. Lo enviás por WhatsApp en segundos.
         </motion.p>
 
-        {/* Aviso de servicio: pedido + preparacion + envio en el dia */}
+        {/* Aviso de servicio: pedido + preparacion + envio (con horario de entrega) */}
         <motion.p
           variants={headerItem}
-          className="mx-auto mt-4 flex max-w-[22rem] items-center justify-center gap-2
+          className="mx-auto mt-4 flex max-w-[22rem] items-start justify-center gap-2
                      rounded-2xl bg-sage/10 px-4 py-3 text-sm font-medium text-sage-dark"
         >
-          <svg viewBox="0 0 24 24" className="h-5 w-5 shrink-0 text-sage" fill="none"
+          <svg viewBox="0 0 24 24" className="mt-0.5 h-5 w-5 shrink-0 text-sage" fill="none"
                stroke="currentColor" strokeWidth="1.7" strokeLinecap="round"
                strokeLinejoin="round" aria-hidden="true">
             <path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z" />
             <circle cx="7" cy="18" r="1.6" />
             <circle cx="17.5" cy="18" r="1.6" />
           </svg>
-          <span>
-            Pedí por WhatsApp, lo preparamos y te lo llevamos a la puerta de tu
-            casa en el día.
+          <span className="text-left">
+            <span className="block">
+              Pedí por WhatsApp, nosotros lo preparamos y te lo enviamos a la
+              puerta de tu casa.
+            </span>
+            <span className="mt-1 block text-xs font-normal text-sage-dark/80">
+              Entregas el siguiente día hábil de 14:00 a 21:00 hs.
+            </span>
           </span>
         </motion.p>
       </motion.div>
@@ -129,9 +134,6 @@ export default function OrderForm({ items, address, onAddressChange, onItemChang
                      focus:outline-none focus:ring-2 focus:ring-sage/40 focus:border-sage/40
                      transition-colors"
         />
-        <p className="mt-2 text-xs leading-relaxed text-ink/60">
-          Entregas el siguiente día hábil de 14:00 a 21:00 hs.
-        </p>
       </div>
     </section>
   );
