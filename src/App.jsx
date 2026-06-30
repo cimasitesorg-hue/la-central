@@ -16,6 +16,7 @@ const newItem = () => ({ id: nextId++, product: "", custom: "", qty: 1 });
 export default function App() {
   // Estado del carrito (fuente de verdad unica)
   const [items, setItems] = useState([newItem()]);
+  const [address, setAddress] = useState("");
   const [error, setError] = useState("");
   const pedidoRef = useRef(null);
 
@@ -42,7 +43,7 @@ export default function App() {
 
   // Derivados: solo items validos cuentan para el resumen y el enlace
   const validItems = useMemo(() => getValidItems(items), [items]);
-  const link = useMemo(() => buildWhatsappLink(items), [items]);
+  const link = useMemo(() => buildWhatsappLink(items, address), [items, address]);
   const isEmpty = validItems.length === 0;
 
   const scrollToPedido = () =>
@@ -64,6 +65,8 @@ export default function App() {
         <div ref={pedidoRef}>
           <OrderForm
             items={items}
+            address={address}
+            onAddressChange={setAddress}
             onItemChange={updateItem}
             onAddItem={addItem}
             onRemoveItem={removeItem}

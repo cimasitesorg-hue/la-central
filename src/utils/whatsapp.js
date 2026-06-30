@@ -24,19 +24,19 @@ export function getValidItems(items = []) {
 }
 
 /** Arma el mensaje con el formato estructurado solicitado. */
-export function buildMessage(items = []) {
+export function buildMessage(items = [], address = "") {
   const valid = getValidItems(items);
   const lines = valid.map((it) => `- ${it.qty} ${it.unit} ${it.product}`).join("\n");
+  const addr = sanitizeText(address, 120).trim();
 
-  return [
-    "¡Hola! Quiero hacer el siguiente pedido:",
-    lines,
-    "¡Muchas gracias!",
-  ].join("\n");
+  const parts = ["¡Hola! Quiero hacer el siguiente pedido:", lines];
+  if (addr) parts.push(`Dirección de entrega: ${addr}`);
+  parts.push("¡Muchas gracias!");
+  return parts.join("\n");
 }
 
 /** Devuelve la URL completa lista para abrir (texto URL-encodeado). */
-export function buildWhatsappLink(items = []) {
-  const text = encodeURIComponent(buildMessage(items));
+export function buildWhatsappLink(items = [], address = "") {
+  const text = encodeURIComponent(buildMessage(items, address));
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${text}`;
 }

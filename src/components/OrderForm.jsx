@@ -16,7 +16,7 @@ const headerItem = {
  * Seccion de pedidos. Recibe los items y handlers desde App (estado elevado)
  * para que la barra fija pueda reflejar el carrito en tiempo real.
  */
-export default function OrderForm({ items, onItemChange, onAddItem, onRemoveItem, error }) {
+export default function OrderForm({ items, address, onAddressChange, onItemChange, onAddItem, onRemoveItem, error }) {
   return (
     <section id="pedido" className="mx-auto max-w-app px-6 pb-6">
       <motion.div
@@ -109,6 +109,30 @@ export default function OrderForm({ items, onItemChange, onAddItem, onRemoveItem
         </motion.span>
         Añadir otro producto
       </motion.button>
+
+      {/* Dirección de entrega: se incluye en el mensaje de WhatsApp del pedido */}
+      <div className="mt-5">
+        <label htmlFor="direccion-entrega" className="mb-1.5 block text-sm font-semibold text-ink">
+          Dirección de entrega
+        </label>
+        <input
+          id="direccion-entrega"
+          type="text"
+          inputMode="text"
+          autoComplete="street-address"
+          maxLength={120}
+          value={address}
+          onChange={(e) => onAddressChange(e.target.value)}
+          placeholder="Calle y número, piso/depto y barrio"
+          className="tap w-full rounded-xl border border-cream-deep bg-cream/60 px-3.5
+                     text-[16px] font-medium text-ink placeholder:text-ink/60
+                     focus:outline-none focus:ring-2 focus:ring-sage/40 focus:border-sage/40
+                     transition-colors"
+        />
+        <p className="mt-2 text-xs leading-relaxed text-ink/60">
+          Entregas el siguiente día hábil de 14:00 a 21:00 hs.
+        </p>
+      </div>
     </section>
   );
 }
