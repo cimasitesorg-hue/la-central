@@ -98,11 +98,11 @@ export default function PhotoShowcase() {
     <section id="local" className="py-8">
       <div className="mx-auto max-w-app px-6 text-center">
         <HeadingReveal className="text-balance font-display text-3xl leading-tight text-ink">
-          ¿Ya conocés nuestro local?
+          Conocé nuestro local
         </HeadingReveal>
         <Reveal delay={0.12} y={14} blur={4} className="mt-2">
           <p className="text-sm leading-relaxed text-ink/70">
-            Un espacio cuidado en el corazón de Caballito. Deslizá para recorrerlo.
+            En el corazón de Caballito, donde día a día elegimos la mejor calidad para vos.
           </p>
         </Reveal>
       </div>
