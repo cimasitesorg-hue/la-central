@@ -1,6 +1,5 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import HeadingReveal from "./HeadingReveal.jsx";
 import Reveal from "./Reveal.jsx";
 
 /**
@@ -97,9 +96,11 @@ export default function PhotoShowcase() {
   return (
     <section id="local" className="py-8">
       <div className="mx-auto max-w-app px-6 text-center">
-        <HeadingReveal className="text-balance font-display text-3xl leading-tight text-ink">
-          Conocé nuestro local
-        </HeadingReveal>
+        <Reveal y={16} blur={5}>
+          <h2 className="text-balance font-display text-3xl leading-tight text-ink">
+            Conocé nuestro local
+          </h2>
+        </Reveal>
         <Reveal delay={0.12} y={14} blur={4} className="mt-2">
           <p className="text-sm leading-relaxed text-ink/70">
             En el corazón de Caballito, donde día a día elegimos la mejor calidad para vos.
