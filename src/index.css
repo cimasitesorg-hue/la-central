@@ -82,6 +82,17 @@
     animation: lc-kenburns 18s ease-in-out infinite alternate;
     transform-origin: center;
   }
+
+  /* Carrusel del local: scroll-snap horizontal sin barra de scroll visible. */
+  .lc-carousel {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-padding-inline: 24px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .lc-carousel::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 /* Keyframes a nivel raíz (no dentro de @layer). */
